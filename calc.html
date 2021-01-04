@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #calc {
+            width: 300px;
+            height: 400px;
+            background: rgb(22, 22, 22);
+            border-radius: 10px;
+            box-shadow: 0 0 2px 4px #333;
+            padding-top: 2px;
+        }
+        .row {
+            width: 300px;
+            height: 50px;
+            margin: 5px 25px;
+        }
+        button {
+            width: 60px;
+            height: 50px;
+            margin-top: 0;
+            border-radius: 4px;
+        }
+        #screen {
+            width: 260px;
+            height: 60px;
+           margin: 10px 9px;
+           box-shadow: inset 0 0 2px 4px #222;
+           background: radial-gradient(rgb(54, 53, 53) 65%,#333 35%);
+            border: none;
+            padding-top: 10px;
+            padding-left: 20px;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+        #switch {
+            width: 124px;
+        }
+        #clear {
+            width: 122px;
+        }
+        .row button {
+            border: none;
+            background: rgb(14, 13, 13);
+            color: #ddd;
+            box-shadow: 1px 1px 1px 1px #666;
+        }
+        .row:last-child {
+            margin-top: 3px;
+        }
+        
+        .row button:active {
+            box-shadow: .5px .5px .5px .5px #333;
+            background: linear-gradient(to right bottom, #000, #333);
+        } 
+    </style>
+
+   
+    <title>Calculator</title>
+</head>
+<body>
+
+    <div id="calc">
+
+    <div id="screen"></div>
+
+    <div class="row">
+        <button onclick="SwitchMe(this)" id="switch">ON</button>
+        <button onclick="appendMe(this)" id="clear">A/C</button>
+    </div>
+    <div class="row">
+        <button onclick="appendMe(this)">1</button>
+        <button onclick="appendMe(this)">2</button>
+        <button onclick="appendMe(this)">3</button>
+        <button onclick="appendMe(this)">+</button>
+    </div>
+    <div class="row">
+        <button onclick="appendMe(this)">4</button>
+        <button onclick="appendMe(this)">5</button>
+        <button onclick="appendMe(this)">6</button>
+        <button onclick="appendMe(this)">*</button>
+    </div>
+    <div class="row">
+        <button onclick="appendMe(this)">7</button>
+        <button onclick="appendMe(this)">8</button>
+        <button onclick="appendMe(this)">9</button>
+        <button onclick="appendMe(this)">-</button>
+    </div>
+    <div class="row">
+        <button onclick="appendMe(this)">0</button>
+        <button onclick="appendMe(this)">.</button>
+        <button onclick="appendMe(this)">/</button>
+        <button onclick="appendMe(this)">=</button>
+    </div>
+
+    </div>
+    <script type="text/javascript">
+        var buttons=document.getElementsByTagName('button');
+  
+  function appendMe(a) {
+      var result = document.getElementById('screen');
+  
+        var k = a.innerHTML;
+          
+        if(k == 'A/C') {
+            result.innerHTML = "0";
+        } else if(document.getElementById('switch').innerHTML == "ON") {
+            
+            for(i=1; i<buttons[i]; i++) {
+                buttons[i].setAttribute("disabled", true);
+            }
+        } 
+         else if(k == "=") {
+            result.innerHTML = eval(result.innerHTML);
+        } 
+        
+        else {
+            //If truely the screen value = 0
+            if(result.innerHTML == "0") {
+                result.innerHTML = k;
+            } else {
+                //meaning the screen value is something else,
+                result.innerHTML += k; 
+            }
+          }
+                }
+  
+                function SwitchMe(b) {
+                  var result = document.getElementById('screen');
+                  
+                   var k = b.innerHTML; 
+                     if(result.innerHTML !== "") {
+                         result.innerHTML = "";
+                         document.getElementById('switch').innerHTML = "ON";
+  
+                         for(i=1; i<buttons.length; i++ ) {
+                             buttons[i].disabled = true;
+                         }
+                     }   
+                     
+                     else {
+                         result.innerHTML = "0";
+                         document.getElementById('switch').innerHTML = "OFF";
+                         for(i=1; i<buttons.length; i++ ) {
+                             buttons[i].disabled = false;
+                         }
+                         }
+                     }
+  
+      </script>
+</body>
+</html>
